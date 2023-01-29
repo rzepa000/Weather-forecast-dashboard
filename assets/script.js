@@ -30,8 +30,17 @@ $(".search-button").on("click", function(event) {
             var p2=$("<p>").text("Temp: "+temp.toFixed(2));
             var p3=$("<p>").text("Wind: "+response.list[0].wind.speed+" KPH");
             var p4=$("<p>").text("Humidity: "+response.list[0].main.humidity+"%");
-            
             todayWeather.append(p1,p2,p3,p4)
+            var fiveDayWeather=$("#forecast");
+            for(var i=7;i<response.list.length; i = i + 7){
+            var p1=$("<p>").text(response.list[i].dt_txt.slice(0, -9));
+            var temp=response.list[i].main.temp-273.15;
+            var p2=$("<p>").text("Temp: "+temp.toFixed(2));
+            var p3=$("<p>").text("Wind: "+response.list[i].wind.speed+" KPH");
+            var p4=$("<p>").text("Humidity: "+response.list[i].main.humidity+"%");
+            fiveDayWeather.append(p1,p2,p3,p4)
+            }
+            // 
           });
       });
      });
