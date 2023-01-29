@@ -21,24 +21,36 @@ $(".search-button").on("click", function(event) {
             method: "GET"
           }).then(function(response) {
             console.log(response)
-            //  var todayWeather=$("#today");
-
-            //  todayWeather.text("City: "+ response.city.name)
+            //today weather
             var todayWeather=$("#today");
-            var p1=$("<p>").text("City: "+response.city.name +" ("+ response.list[0].dt_txt.slice(0, -9)+")");
+            var p1=$("<p>").text(response.city.name +" ("+ response.list[0].dt_txt.slice(0, -9)+")");
+            p1.css({"font-weight": "bold","font-size":"30px"});
             var temp=response.list[0].main.temp-273.15;
-            var p2=$("<p>").text("Temp: "+temp.toFixed(2));
+            var p2=$("<p>").text("Temp: "+temp.toFixed(2)+"°C");
             var p3=$("<p>").text("Wind: "+response.list[0].wind.speed+" KPH");
             var p4=$("<p>").text("Humidity: "+response.list[0].main.humidity+"%");
             todayWeather.append(p1,p2,p3,p4)
+            //five day forecast weather
             var fiveDayWeather=$("#forecast");
+            var fiveHeader=$("<h4>").text("5 day forecast:  ");
+            $("#weather-section section:eq(0)").after(fiveHeader)
             for(var i=7;i<response.list.length; i = i + 7){
+            var dayBlock=$("<div>");
+            dayBlock.addClass("col mx-3");
+            dayBlock.css("background-color","#19334d")
             var p1=$("<p>").text(response.list[i].dt_txt.slice(0, -9));
+            p1.css("font-weight", "bold");
+            p1.css("color", "white");
+            p1.css("font-size","18px");
             var temp=response.list[i].main.temp-273.15;
-            var p2=$("<p>").text("Temp: "+temp.toFixed(2));
+            var p2=$("<p>").text("Temp: "+temp.toFixed(2)+"°C");
+            p2.css("color", "white");
             var p3=$("<p>").text("Wind: "+response.list[i].wind.speed+" KPH");
+            p3.css("color", "white");
             var p4=$("<p>").text("Humidity: "+response.list[i].main.humidity+"%");
-            fiveDayWeather.append(p1,p2,p3,p4)
+            p4.css("color", "white");
+            dayBlock.append(p1,p2,p3,p4)
+            fiveDayWeather.append(dayBlock)
             }
             // 
           });
