@@ -12,27 +12,36 @@ $(".search-button").on("click", function(event) {
     $.ajax({
         url: queryURL,
         method: "GET"
-      }).then(function(response) {
-        //console.log(response)
-        
-
+      }).then(function(response) {          
         var lat=response[0].lat;
         var lon=response[0].lon;
-        console.log(lat)
-        console.log(lon)
         var queryURL2 = "https://api.openweathermap.org/data/2.5/forecast?lat="+lat+"&lon="+lon+"&appid=2e29d353623540203dd5c954be6f0d7e" ;
-
-
         $.ajax({
             url: queryURL2,
             method: "GET"
           }).then(function(response) {
             console.log(response)
+            //  var todayWeather=$("#today");
+
+            //  todayWeather.text("City: "+ response.city.name)
+            var todayWeather=$("#today");
+            var p1=$("<p>").text("City: "+response.city.name +" ("+ response.list[0].dt_txt.slice(0, -9)+")");
+            var temp=response.list[0].main.temp-273.15;
+            var p2=$("<p>").text("Temp: "+temp.toFixed(2));
+            var p3=$("<p>").text("Wind: "+response.list[0].wind.speed+" KPH");
+            var p4=$("<p>").text("Humidity: "+response.list[0].main.humidity+"%");
             
-    
-            
+            todayWeather.append(p1,p2,p3,p4)
           });
       });
-      console.log("test")
-  });
+     });
 
+function displayWeatherInfo(){
+    
+    // $('.wind').text("Wind speed: "+response.wind.speed)
+    // $('.humidity').text("Humidity: "+response.main.humidity)
+    // var temp=response.main.temp-273.15;
+    // $('.temp').text("Temperature: "+temp.toFixed(2))
+
+
+}
