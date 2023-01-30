@@ -4,7 +4,32 @@
 
 
 $(".search-button").on("click", function(event) {
-    event.preventDefault();
+    displayWeatherInfo();
+     });
+$(document).on("click", ".list-group", displayWeatherInfo);
+
+     var weatherHistory = [];
+
+     
+     function renderButtons() {
+       $("#history").empty();
+     
+       for (var i = 0; i < weatherHistory.length; i++) {
+     
+         var a = $("<button>");
+          a.addClass("btn btn-secondary btn-block");
+          a.text(weatherHistory[i]);
+          $("#history").append(a);
+       }
+     }
+     function displayWeatherInfo(){
+      event.preventDefault();
+    $("#today").empty();
+    $("#forecast").empty();
+    if (  $("#five-head").length==1 ) {
+      $("#five-head").empty();
+              
+    }
     var city = $("#search-input").val();
     var queryURL = "http://api.openweathermap.org/geo/1.0/direct?q={"+city+"}&limit=1&appid=77700be72a5fa60eecb9e44751616b78" ;
 
@@ -61,9 +86,13 @@ $(".search-button").on("click", function(event) {
             p1.append(weatherIcon)
 
             //five day forecast weather
+            
             var fiveDayWeather=$("#forecast");
-            var fiveHeader=$("<h4>").text("5 day forecast:  ");
+            var fiveHeader=$("<h4>").attr('id', 'five-head');;
+            fiveHeader.text("5 day forecast:  ")
             $("#weather-section section:eq(0)").after(fiveHeader)
+            console.log(fiveHeader.val().length)
+            
             for(var i=7;i<response.list.length; i = i + 7){
             var weatherIcon2= $("<img>")   
             //different icons for weather
@@ -112,14 +141,10 @@ $(".search-button").on("click", function(event) {
             // 
           });
       });
-     });
-
-function displayWeatherInfo(){
-    
-    // $('.wind').text("Wind speed: "+response.wind.speed)
-    // $('.humidity').text("Humidity: "+response.main.humidity)
-    // var temp=response.main.temp-273.15;
-    // $('.temp').text("Temperature: "+temp.toFixed(2))
-
-
-}
+      var city = $("#search-input").val();
+      
+       weatherHistory.push(city);
+     
+       renderButtons();
+     }
+     renderButtons();
