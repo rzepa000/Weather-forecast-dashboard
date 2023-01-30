@@ -1,36 +1,17 @@
 
 
-
-
-
-$(".search-button").on("click", function(event) {
-    displayWeatherInfo();
-     });
-$(document).on("click", ".list-group", displayWeatherInfo);
-
      var weatherHistory = [];
-
-     
-     function renderButtons() {
-       $("#history").empty();
-     
-       for (var i = 0; i < weatherHistory.length; i++) {
-     
-         var a = $("<button>");
-          a.addClass("btn btn-secondary btn-block");
-          a.text(weatherHistory[i]);
-          $("#history").append(a);
-       }
-     }
-     function displayWeatherInfo(){
-      event.preventDefault();
+function displayWeatherInfo(monke){
+    event.preventDefault();
     $("#today").empty();
     $("#forecast").empty();
     if (  $("#five-head").length==1 ) {
       $("#five-head").empty();
               
     }
-    var city = $("#search-input").val();
+    // var city = $("#search-input").val();
+    // var city = $(this).attr("data-name");
+    var city = monke;
     var queryURL = "http://api.openweathermap.org/geo/1.0/direct?q={"+city+"}&limit=1&appid=77700be72a5fa60eecb9e44751616b78" ;
 
     console.log(queryURL)
@@ -141,10 +122,37 @@ $(document).on("click", ".list-group", displayWeatherInfo);
             // 
           });
       });
-      var city = $("#search-input").val();
       
-       weatherHistory.push(city);
-     
-       renderButtons();
      }
+     
+     function renderButtons() {
+       $("#history").empty();
+     
+       for (var i = 0; i < weatherHistory.length; i++) {
+     
+         var a = $("<button>");
+          a.addClass("weather-btn btn-secondary btn-block");
+          a.attr("data-name", weatherHistory[i]);
+          a.text(weatherHistory[i]);
+          $("#history").append(a);
+       }
+     }
+     
+
+
+     $("#search-button").on("click", function(event) {
+      
+          var city = $("#search-input").val();
+          console.log(city)
+          weatherHistory.push(city);
+          displayWeatherInfo($("#search-input").val());
+          renderButtons();
+          
+        
+         });
+    $(document).on("click", ".weather-btn",function(event){
+      displayWeatherInfo($(this).attr("data-name"));
+    });
+    console.log(weatherHistory)
+
      renderButtons();
