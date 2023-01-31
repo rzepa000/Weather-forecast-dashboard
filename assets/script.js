@@ -12,7 +12,7 @@ function displayWeatherInfo(cityparamater){
     // var city = $("#search-input").val();
     // var city = $(this).attr("data-name");
     var city = cityparamater;
-    var queryURL = "https://cors-anywhere.herokuapp.com/http://api.openweathermap.org/geo/1.0/direct?q={"+city+"}&limit=1&appid=77700be72a5fa60eecb9e44751616b78" ;
+    var queryURL = "https://api.openweathermap.org/geo/1.0/direct?q={"+city+"}&limit=1&appid=77700be72a5fa60eecb9e44751616b78" ;
 
     console.log(queryURL)
     $.ajax({
@@ -21,7 +21,7 @@ function displayWeatherInfo(cityparamater){
       }).then(function(response) {          
         var lat=response[0].lat;
         var lon=response[0].lon;
-        var queryURL2 = "https://cors-anywhere.herokuapp.com/https://api.openweathermap.org/data/2.5/forecast?lat="+lat+"&lon="+lon+"&appid=2e29d353623540203dd5c954be6f0d7e" ;
+        var queryURL2 = "https://api.openweathermap.org/data/2.5/forecast?lat="+lat+"&lon="+lon+"&appid=2e29d353623540203dd5c954be6f0d7e" ;
         $.ajax({
             url: queryURL2,
             method: "GET"
@@ -34,27 +34,27 @@ function displayWeatherInfo(cityparamater){
             //different icons for weather
             var weatherCondition=response.list[0].weather[0].id;
               if(weatherCondition==800){
-                weatherIcon.attr("src", "http://openweathermap.org/img/wn/01d@2x.png")
+                weatherIcon.attr("src", "https://openweathermap.org/img/wn/01d@2x.png")
               }else if(weatherCondition==801){
-                weatherIcon.attr("src", "http://openweathermap.org/img/wn/02d@2x.png")
+                weatherIcon.attr("src", "https://openweathermap.org/img/wn/02d@2x.png")
               }else if(weatherCondition==802){
-                weatherIcon.attr("src", "http://openweathermap.org/img/wn/03d@2x.png")
+                weatherIcon.attr("src", "https://openweathermap.org/img/wn/03d@2x.png")
               }else if(weatherCondition>=803){
-                weatherIcon.attr("src", "http://openweathermap.org/img/wn/04d@2x.png")
+                weatherIcon.attr("src", "https://openweathermap.org/img/wn/04d@2x.png")
               }else if(weatherCondition>=200 && weatherCondition<=232){
-                weatherIcon.attr("src", "http://openweathermap.org/img/wn/11d@2x.png")
+                weatherIcon.attr("src", "https://openweathermap.org/img/wn/11d@2x.png")
               }else if(weatherCondition>=300 && weatherCondition<=321){
-                weatherIcon.attr("src", "http://openweathermap.org/img/wn/09d@2x.png")
+                weatherIcon.attr("src", "https://openweathermap.org/img/wn/09d@2x.png")
               }else if(weatherCondition>=500 && weatherCondition<=504){
-                weatherIcon.attr("src", "http://openweathermap.org/img/wn/10d@2x.png")
+                weatherIcon.attr("src", "https://openweathermap.org/img/wn/10d@2x.png")
               }else if(weatherCondition>=520 && weatherCondition<=531){
-                weatherIcon.attr("src", "http://openweathermap.org/img/wn/09d@2x.png")
+                weatherIcon.attr("src", "https://openweathermap.org/img/wn/09d@2x.png")
               }else if(weatherCondition>=511){
-                weatherIcon.attr("src", "http://openweathermap.org/img/wn/13d@2x.png")
+                weatherIcon.attr("src", "https://openweathermap.org/img/wn/13d@2x.png")
               }else if(weatherCondition>=600 && weatherCondition<=622){
-                weatherIcon.attr("src", "http://openweathermap.org/img/wn/13d@2x.png")
+                weatherIcon.attr("src", "https://openweathermap.org/img/wn/13d@2x.png")
               }else if(weatherCondition>=701 && weatherCondition<=781){
-                weatherIcon.attr("src", "http://openweathermap.org/img/wn/50d@2x.png")
+                weatherIcon.attr("src", "https://openweathermap.org/img/wn/50d@2x.png")
               }    
             var todayWeather=$("#today");
             todayWeather.css("border","solid 1px")
@@ -95,27 +95,27 @@ function displayWeatherInfo(cityparamater){
             p4.css("color", "white");
             //different icons for weather
             if(weatherCondition2==800){
-              weatherIcon2.attr("src", "http://openweathermap.org/img/wn/01d@2x.png")
+              weatherIcon2.attr("src", "https://openweathermap.org/img/wn/01d@2x.png")
             }else if(weatherCondition2==801){
-              weatherIcon2.attr("src", "http://openweathermap.org/img/wn/02d@2x.png")
+              weatherIcon2.attr("src", "https://openweathermap.org/img/wn/02d@2x.png")
             }else if(weatherCondition2==802){
-              weatherIcon2.attr("src", "http://openweathermap.org/img/wn/03d@2x.png")
+              weatherIcon2.attr("src", "https://openweathermap.org/img/wn/03d@2x.png")
             }else if(weatherCondition2>=803){
-              weatherIcon2.attr("src", "http://openweathermap.org/img/wn/04d@2x.png")
+              weatherIcon2.attr("src", "https://openweathermap.org/img/wn/04d@2x.png")
             }else if(weatherCondition2>=200 && weatherCondition2<=232){
-              weatherIcon2.attr("src", "http://openweathermap.org/img/wn/11d@2x.png")
+              weatherIcon2.attr("src", "https://openweathermap.org/img/wn/11d@2x.png")
             }else if(weatherCondition2>=300 && weatherCondition2<=321){
-              weatherIcon2.attr("src", "http://openweathermap.org/img/wn/09d@2x.png")
+              weatherIcon2.attr("src", "https://openweathermap.org/img/wn/09d@2x.png")
             }else if(weatherCondition2>=500 && weatherCondition2<=504){
-              weatherIcon2.attr("src", "http://openweathermap.org/img/wn/10d@2x.png")
+              weatherIcon2.attr("src", "https://openweathermap.org/img/wn/10d@2x.png")
             }else if(weatherCondition2>=520 && weatherCondition2<=531){
-              weatherIcon2.attr("src", "http://openweathermap.org/img/wn/09d@2x.png")
+              weatherIcon2.attr("src", "https://openweathermap.org/img/wn/09d@2x.png")
             }else if(weatherCondition2>=511){
-              weatherIcon2.attr("src", "http://openweathermap.org/img/wn/13d@2x.png")
+              weatherIcon2.attr("src", "https://openweathermap.org/img/wn/13d@2x.png")
             }else if(weatherCondition2>=600 && weatherCondition2<=622){
-              weatherIcon2.attr("src", "http://openweathermap.org/img/wn/13d@2x.png")
+              weatherIcon2.attr("src", "https://openweathermap.org/img/wn/13d@2x.png")
             }else if(weatherCondition2>=701 && weatherCondition2<=781){
-              weatherIcon2.attr("src", "http://openweathermap.org/img/wn/50d@2x.png")
+              weatherIcon2.attr("src", "https://openweathermap.org/img/wn/50d@2x.png")
             } 
             weatherIcon2.css({"width": "50px","heigth": "50px"});
             dayBlock.append(p1,weatherIcon2,p2,p3,p4)
