@@ -12,7 +12,7 @@ function displayWeatherInfo(cityparamater){
     // var city = $("#search-input").val();
     // var city = $(this).attr("data-name");
     var city = cityparamater;
-    var queryURL = "http://api.openweathermap.org/geo/1.0/direct?q={"+city+"}&limit=1&appid=77700be72a5fa60eecb9e44751616b78" ;
+    var queryURL = "https://cors-anywhere.herokuapp.com/http://api.openweathermap.org/geo/1.0/direct?q={"+city+"}&limit=1&appid=77700be72a5fa60eecb9e44751616b78" ;
 
     console.log(queryURL)
     $.ajax({
@@ -21,7 +21,7 @@ function displayWeatherInfo(cityparamater){
       }).then(function(response) {          
         var lat=response[0].lat;
         var lon=response[0].lon;
-        var queryURL2 = "https://api.openweathermap.org/data/2.5/forecast?lat="+lat+"&lon="+lon+"&appid=2e29d353623540203dd5c954be6f0d7e" ;
+        var queryURL2 = "https://cors-anywhere.herokuapp.com/https://api.openweathermap.org/data/2.5/forecast?lat="+lat+"&lon="+lon+"&appid=2e29d353623540203dd5c954be6f0d7e" ;
         $.ajax({
             url: queryURL2,
             method: "GET"
