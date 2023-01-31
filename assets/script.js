@@ -1,7 +1,7 @@
 
 
-     var weatherHistory = [];
-function displayWeatherInfo(monke){
+var weatherHistory = [];
+function displayWeatherInfo(cityparamater){
     event.preventDefault();
     $("#today").empty();
     $("#forecast").empty();
@@ -11,7 +11,7 @@ function displayWeatherInfo(monke){
     }
     // var city = $("#search-input").val();
     // var city = $(this).attr("data-name");
-    var city = monke;
+    var city = cityparamater;
     var queryURL = "http://api.openweathermap.org/geo/1.0/direct?q={"+city+"}&limit=1&appid=77700be72a5fa60eecb9e44751616b78" ;
 
     console.log(queryURL)
@@ -127,13 +127,15 @@ function displayWeatherInfo(monke){
      
      function renderButtons() {
        $("#history").empty();
-     
-       for (var i = 0; i < weatherHistory.length; i++) {
+        var weatherHistoryperm=JSON.parse(localStorage.getItem("arr"));
+        console.log(weatherHistoryperm)
+          
+       for (var i = 0; i < weatherHistoryperm.length; i++) {
      
          var a = $("<button>");
           a.addClass("weather-btn btn-secondary btn-block");
-          a.attr("data-name", weatherHistory[i]);
-          a.text(weatherHistory[i]);
+          a.attr("data-name", weatherHistoryperm[i]);
+          a.text(weatherHistoryperm[i]);
           $("#history").append(a);
        }
      }
@@ -143,10 +145,35 @@ function displayWeatherInfo(monke){
      $("#search-button").on("click", function(event) {
       
           var city = $("#search-input").val();
-          console.log(city)
-          weatherHistory.push(city);
+          //console.log(city)
+          if (city === "") {
+            alert( "City cannot be blank");
+          }else if((JSON.parse(localStorage.getItem("arr")))===null){
+            localStorage.setItem("city", city);
+            localStorage.setItem("arr", JSON.stringify(weatherHistory));
+            weatherHistory=JSON.parse(localStorage.getItem("arr"));
+            weatherHistory.push(city)
+            localStorage.setItem("arr", JSON.stringify(weatherHistory));
+           weatherHistory=JSON.parse(localStorage.getItem("arr"));
+           
+          }else {
+            
+            
+            localStorage.setItem("city", city);
+            weatherHistory=JSON.parse(localStorage.getItem("arr"));
+            weatherHistory.push(city)
+            localStorage.setItem("arr", JSON.stringify(weatherHistory));
+            weatherHistory=JSON.parse(localStorage.getItem("arr"));
+            
+            
+            
+          }
+          //weatherHistory.push(city);
+          //localStorage.setItem('myHistory', weatherHistory)
           displayWeatherInfo($("#search-input").val());
           renderButtons();
+          
+          
           
         
          });
