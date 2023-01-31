@@ -1,6 +1,6 @@
 
-
-var weatherHistory = [];
+var weatherHistory = []; //array holding search history
+$(".weather-header").css({"background": "rgb(2,0,36)","background":"linear-gradient(270deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%)"});
 function displayWeatherInfo(cityparamater){
     event.preventDefault();
     $("#today").empty();
@@ -28,7 +28,7 @@ function displayWeatherInfo(cityparamater){
           }).then(function(response) {
             console.log(response)
             console.log(response.list[0].weather[0].id)
-            //today weather
+          //todays weather
             var weatherIcon= $("<img>") 
             weatherIcon.css({"width": "50px","heigth": "50px"});  
             //different icons for weather
@@ -57,6 +57,7 @@ function displayWeatherInfo(cityparamater){
                 weatherIcon.attr("src", "http://openweathermap.org/img/wn/50d@2x.png")
               }    
             var todayWeather=$("#today");
+            todayWeather.css("border","solid 1px")
             var p1=$("<p>").text(response.city.name +" ("+ response.list[0].dt_txt.slice(0, -9)+")");
             p1.css({"font-weight": "bold","font-size":"30px"});
             var temp=response.list[0].main.temp-273.15;
@@ -66,7 +67,7 @@ function displayWeatherInfo(cityparamater){
             todayWeather.append(p1,p2,p3,p4)
             p1.append(weatherIcon)
 
-            //five day forecast weather
+          //five day forecast weather
             
             var fiveDayWeather=$("#forecast");
             var fiveHeader=$("<h4>").attr('id', 'five-head');;
@@ -76,7 +77,7 @@ function displayWeatherInfo(cityparamater){
             
             for(var i=7;i<response.list.length; i = i + 7){
             var weatherIcon2= $("<img>")   
-            //different icons for weather
+            
             var weatherCondition2=response.list[i].weather[0].id;
             var dayBlock=$("<div>");
             dayBlock.addClass("col mx-3");
@@ -92,6 +93,7 @@ function displayWeatherInfo(cityparamater){
             p3.css("color", "white");
             var p4=$("<p>").text("Humidity: "+response.list[i].main.humidity+"%");
             p4.css("color", "white");
+            //different icons for weather
             if(weatherCondition2==800){
               weatherIcon2.attr("src", "http://openweathermap.org/img/wn/01d@2x.png")
             }else if(weatherCondition2==801){
@@ -124,7 +126,7 @@ function displayWeatherInfo(cityparamater){
       });
       
      }
-     
+     // function to render buttons in history
      function renderButtons() {
        $("#history").empty();
         var weatherHistoryperm=JSON.parse(localStorage.getItem("arr"));
@@ -177,9 +179,11 @@ function displayWeatherInfo(cityparamater){
           
         
          });
+
     $(document).on("click", ".weather-btn",function(event){
       displayWeatherInfo($(this).attr("data-name"));
     });
-    console.log(weatherHistory)
 
-     renderButtons();
+    //console.log(weatherHistory)
+    
+    renderButtons();
